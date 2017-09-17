@@ -9,4 +9,11 @@
     <string name="student_name">Piyush</string>
     <string name="batch_name">Crux</string>
     <string name="toast_attendance_is_saved">Today\'s Attendance is saved.</string>
+    <string name="add_course_name_label">Course Name</string>
+    <string name="add_number_of_lectures">Number of Lectures</string>
+    <string name="add_students">Student name</string>
+    <string name="add">add student</string>
+    <string name="btn_add_course">Add course</string>
+    <string name="create_course">create course</string>
+    <string name="done">done</string>
 </resources>

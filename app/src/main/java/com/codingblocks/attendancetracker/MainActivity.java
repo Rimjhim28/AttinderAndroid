@@ -77,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO: create a DB table for this course
-                Toast.makeText(getApplicationContext(), R.string.create_batch, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this,CreateNewCourse.class);
+                startActivity(intent);
             }
         });
     }
