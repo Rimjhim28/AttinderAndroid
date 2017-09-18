@@ -1,9 +1,11 @@
 package com.codingblocks.attendancetracker;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -11,18 +13,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.codingblocks.attendancetracker.batch_database.BatchDbHelper;
 import com.codingblocks.attendancetracker.models.Batch;
 import com.codingblocks.attendancetracker.models.Student;
 import com.daprlabs.cardstack.SwipeDeck;
 import com.piotrek.customspinner.CustomSpinner;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -59,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
         FontsOverride.applyFontForToolbarTitle(this, FontsOverride.FONT_PROXIMA_NOVA,getWindow());
 
-        initViews();
-        initSpinnerAdapter();
+            initViews();
+            initSpinnerAdapter();
 
         absentIds = new ArrayList<>();
         presentIds = new ArrayList<>();
@@ -83,10 +90,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void initSpinnerAdapter() {
+    public void initSpinnerAdapter() {
         final String hintText = "Choose a batch... ";
 
-        ArrayList<String> batches = Batch.getDummyBatches();
+        BatchDbHelper db = new BatchDbHelper(this);
+        ArrayList<String> batches = db.getAllBatches();
         spinner.initializeStringValues(batches.toArray(new String[batches.size()]), hintText);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -209,5 +217,4 @@ public class MainActivity extends AppCompatActivity {
         TextView tv_batch;
         ImageView iv_photo;
     }
-
 }

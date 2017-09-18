@@ -1,25 +1,30 @@
 package com.codingblocks.attendancetracker.models;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.codingblocks.attendancetracker.batch_database.BatchDbHelper;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by piyush0 on 12/12/16.
  */
 
+
 public class Batch {
     String name;
-
+    static ArrayList<String> batches = new ArrayList<>();
 
     public static ArrayList<String> getDummyBatches() {
-        ArrayList<String> batches = new ArrayList<>();
 
         batches.add("Crux");
         batches.add("Pandora");
         batches.add("Launchpad");
-
         batches.add("Elixir");
-
         batches.add("Django");
+
         return batches;
 
     }
@@ -35,5 +40,9 @@ public class Batch {
 
     public Batch(String name) {
         this.name = name;
+    }
+
+    public static void addNewBatch(String newBatch){
+        batches.add(newBatch);
     }
 }

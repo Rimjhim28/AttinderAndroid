@@ -1,11 +1,16 @@
 package com.codingblocks.attendancetracker;
 
+import android.content.ContentValues;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.codingblocks.attendancetracker.batch_database.BatchContract;
+import com.codingblocks.attendancetracker.models.Batch;
 
 public class CreateNewCourse extends AppCompatActivity {
 
@@ -57,7 +62,12 @@ public class CreateNewCourse extends AppCompatActivity {
         mCourseName = txtCourseName.getText().toString();
         mStringNumberOfLectures = txtNumberOfLectures.getText().toString();
         mNumberOfLectures = Integer.parseInt(mStringNumberOfLectures);
-        Toast.makeText(this,"Course name:" + mCourseName + "\nNumber of Lectures" + mStringNumberOfLectures,Toast.LENGTH_SHORT).show();
+
+        ContentValues values = new ContentValues();
+        values.put(BatchContract.BatchEntry.COLUMN_BATCH_NAME,mCourseName);
+        values.put(BatchContract.BatchEntry.COLUMN_NUMBER_OF_LECTURES,mNumberOfLectures);
+
+        Uri newUri =  getContentResolver().insert(BatchContract.BatchEntry.CONTENT_URI,values);
     }
 
     private void addStudent(){
