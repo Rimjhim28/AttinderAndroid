@@ -28,11 +28,11 @@ public class BatchDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String SQL_CREATE_PETS_TABLE =  "CREATE TABLE " + BatchContract.BatchEntry.TABLE_NAME + " ("
+        String SQL_CREATE_BATCH_TABLE =  "CREATE TABLE " + BatchContract.BatchEntry.TABLE_NAME + " ("
                 + BatchContract.BatchEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + BatchContract.BatchEntry.COLUMN_BATCH_NAME + " TEXT NOT NULL, "
                 + BatchContract.BatchEntry.COLUMN_NUMBER_OF_LECTURES + " INTEGER NOT NULL);";
-        db.execSQL(SQL_CREATE_PETS_TABLE);
+        db.execSQL(SQL_CREATE_BATCH_TABLE);
 
     }
 
