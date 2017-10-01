@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codingblocks.attendancetracker.database.BatchesDAO;
+import com.codingblocks.attendancetracker.database.StudentsDAO;
 import com.codingblocks.attendancetracker.models.Batch;
 import com.codingblocks.attendancetracker.models.Student;
 import com.daprlabs.cardstack.SwipeDeck;
@@ -98,8 +99,6 @@ public class MainActivity extends AppCompatActivity {
                     selectedBatch = adapterView.getSelectedItem().toString();
                     fetchStudent(selectedBatch);
                 }
-
-
             }
 
             @Override
@@ -110,11 +109,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchStudent(String batch) {
-        //TODO: Get students based on batch
-        Log.d(TAG, "fetchStudent: ");
+        StudentsDAO ob = new StudentsDAO(this);
         absentIds = new ArrayList<>();
         presentIds = new ArrayList<>();
-        students = Student.getDummyStudents();
+        students = ob.getallStudents(batch);
         myAdapter = new MyAdapter();
         cardStack.setAdapter(myAdapter);
         setupEventListener();

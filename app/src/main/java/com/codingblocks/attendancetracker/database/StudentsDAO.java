@@ -3,7 +3,12 @@ package com.codingblocks.attendancetracker.database;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.codingblocks.attendancetracker.models.Student;
+
+import java.util.ArrayList;
 
 /**
  * Created by HP on 01-10-2017.
@@ -26,5 +31,27 @@ public class StudentsDAO {
         values.put(DbHelper.COLUMN_STUDENT_BATCH_NAME,batchName);
         long id = database.insert(DbHelper.TABLE_NAME_STUDENTS,null,values);
         return id;
+    }
+
+    public ArrayList<Student> getallStudents(String batch){
+        SQLiteDatabase database = mDbHelper.getReadableDatabase();
+        Student student;
+        ArrayList<Student> allBatchStudents = new ArrayList<>();
+        Cursor cursor = database.query(DbHelper.TABLE_NAME_STUDENTS,
+                new String[]{DbHelper.COLUMN_STUDENT_ID,DbHelper.COLUMN_STUDENT_NAME,DbHelper.COLUMN_STUDENT_BATCH_NAME},
+                DbHelper.COLUMN_STUDENT_BATCH_NAME + " = ?",
+                new String[]{batch},null,null,null);
+        cursor.moveToFirst();
+        do{
+            int indexStudentId = cursor.getColumnIndex(DbHelper.COLUMN_STUDENT_ID);
+            int indexStudentName = cursor.getColumnIndex(DbHelper.COLUMN_STUDENT_NAME);
+            int indexBatchName = cursor.getColumnIndex(DbHelper.COLUMN_STUDENT_BATCH_NAME);
+            int studentId = cursor.getInt(indexStudentId);
+            String studentName = cursor.getString(indexStudentName);
+            String batchName = cursor.getString(indexBatchName);
+            student = new Student(studentId,studentName,batchName,null);
+            allBatchStudents.add(student);
+        }while (cursor.moveToNext());
+        return allBatchStudents;
     }
 }
