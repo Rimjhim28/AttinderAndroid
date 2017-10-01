@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.codingblocks.attendancetracker.database.AttendanceDAO;
 import com.codingblocks.attendancetracker.models.Student;
 
 import java.util.ArrayList;
@@ -24,6 +25,9 @@ public class ListOfAbsentPresentStudentsActivity extends AppCompatActivity {
 
     private PresentAdapter presentAdapter;
     private AbsentAdapter absentAdapter;
+    private ArrayList<Integer> presentIds;
+    private ArrayList<Integer> absentIds;
+    private String batch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +43,9 @@ public class ListOfAbsentPresentStudentsActivity extends AppCompatActivity {
 
     private void fetchStudents(Intent intent) {
 
-        ArrayList<Integer> presentIds = intent.getIntegerArrayListExtra("presentIds");
-        ArrayList<Integer> absentIds = intent.getIntegerArrayListExtra("absentIds");
+        presentIds = intent.getIntegerArrayListExtra("presentIds");
+        absentIds = intent.getIntegerArrayListExtra("absentIds");
+        batch = intent.getStringExtra("batchName");
 
         ArrayList<Student> allStudents = Student.getDummyStudents();
 
@@ -74,6 +79,7 @@ public class ListOfAbsentPresentStudentsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //TODO: Save attendance online.
                 Toast.makeText(ListOfAbsentPresentStudentsActivity.this, R.string.toast_attendance_is_saved, Toast.LENGTH_SHORT).show();
+                submitAttendance();
             }
         });
 
@@ -85,6 +91,12 @@ public class ListOfAbsentPresentStudentsActivity extends AppCompatActivity {
 
         absentList.setAdapter(absentAdapter);
         absentList.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void submitAttendance(){
+        AttendanceDAO ob = new AttendanceDAO(this);
+        long id = ob.addAttendance(batch,0,presentIds,absentIds);
+        Toast.makeText(this,""+id,Toast.LENGTH_SHORT).show();
     }
 
     private class MyViewHolder extends RecyclerView.ViewHolder {
@@ -159,6 +171,7 @@ public class ListOfAbsentPresentStudentsActivity extends AppCompatActivity {
         public int getItemCount() {
             return absentStudents.size();
         }
+
     }
 
 }

@@ -1,6 +1,8 @@
 package com.codingblocks.attendancetracker;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codingblocks.attendancetracker.database.BatchesDAO;
+import com.codingblocks.attendancetracker.database.DbHelper;
 import com.codingblocks.attendancetracker.database.StudentsDAO;
 import com.codingblocks.attendancetracker.models.Batch;
 import com.codingblocks.attendancetracker.models.Student;
@@ -85,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void initSpinnerAdapter() {
+    public void initSpinnerAdapter() {
         final String hintText = "Choose a batch... ";
 
         ArrayList<String> batches = (ArrayList<String>) ob.getAllBatches();
@@ -103,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
     }
@@ -143,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, ListOfAbsentPresentStudentsActivity.class);
                 intent.putExtra("presentIds", presentIds);
                 intent.putExtra("absentIds", absentIds);
+                intent.putExtra("batchName",selectedBatch);
                 startActivity(intent);
             }
 
@@ -207,6 +210,20 @@ public class MainActivity extends AppCompatActivity {
         TextView tv_name;
         TextView tv_batch;
         ImageView iv_photo;
+    }
+
+    private int numberOfLectures(String batchName){
+        DbHelper mDbHelper = new DbHelper(this);
+        SQLiteDatabase database = mDbHelper.getReadableDatabase();
+        Cursor cursor = database.query(DbHelper.TABLE_NAME_ATTENDANCE,
+                new String[]{DbHelper.COLUMN_BATCH,DbHelper.COLUMN_LECTURE_NUMBER,},
+                DbHelper.COLUMN_BATCH +" = ?",
+                new String[]{batchName},
+                null,null,null,null);
+        if(cursor.moveToFirst())
+            return cursor.getInt(cursor.getColumnIndex(DbHelper.COLUMN_LECTURE_NUMBER));
+        else
+            return 0;
     }
 
 }
