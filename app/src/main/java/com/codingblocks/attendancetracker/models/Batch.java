@@ -3,7 +3,7 @@ package com.codingblocks.attendancetracker.models;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.codingblocks.attendancetracker.batch_database.BatchDbHelper;
+
 
 import java.util.ArrayList;
 import java.util.List;

@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.codingblocks.attendancetracker.batch_database.BatchContract;
+import com.codingblocks.attendancetracker.database.BatchesDAO;
 import com.codingblocks.attendancetracker.models.Batch;
 
 public class CreateNewCourse extends AppCompatActivity {
@@ -63,11 +63,14 @@ public class CreateNewCourse extends AppCompatActivity {
         mStringNumberOfLectures = txtNumberOfLectures.getText().toString();
         mNumberOfLectures = Integer.parseInt(mStringNumberOfLectures);
 
-        ContentValues values = new ContentValues();
-        values.put(BatchContract.BatchEntry.COLUMN_BATCH_NAME,mCourseName);
-        values.put(BatchContract.BatchEntry.COLUMN_NUMBER_OF_LECTURES,mNumberOfLectures);
+        // ContentValues values = new ContentValues();
+        // values.put(BatchContract.BatchEntry.COLUMN_BATCH_NAME,mCourseName);
+        // values.put(BatchContract.BatchEntry.COLUMN_NUMBER_OF_LECTURES,mNumberOfLectures);
 
-        Uri newUri =  getContentResolver().insert(BatchContract.BatchEntry.CONTENT_URI,values);
+        // Uri newUri =  getContentResolver().insert(BatchContract.BatchEntry.CONTENT_URI,values);
+        BatchesDAO ob = new BatchesDAO(this);
+        long id = ob.createBatch(mCourseName);
+        Toast.makeText(this,""+id,Toast.LENGTH_SHORT).show();
     }
 
     private void addStudent(){

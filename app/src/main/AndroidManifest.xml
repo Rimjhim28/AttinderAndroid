@@ -20,12 +20,6 @@
         <activity android:name=".ListOfAbsentPresentStudentsActivity" />
         <activity android:name=".CreateNewCourse"></activity>
 
-
-        <provider
-            android:name=".batch_database.BatchProvider"
-            android:authorities="com.codingblocks.attendancetracker"
-            android:exported="true"/>
-
     </application>
 
 
