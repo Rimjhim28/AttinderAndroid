@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.codingblocks.attendancetracker.database.BatchesDAO;
+import com.codingblocks.attendancetracker.database.StudentsDAO;
 import com.codingblocks.attendancetracker.models.Batch;
 
 public class CreateNewCourse extends AppCompatActivity {
@@ -67,10 +68,13 @@ public class CreateNewCourse extends AppCompatActivity {
         Toast.makeText(this,""+id,Toast.LENGTH_SHORT).show();
     }
 
-    private void addStudent(){
+    public void addStudent(){
         mNumberOfStudents++;
         mStudentName = txtStudentName.getText().toString();
-        Toast.makeText(this,mStudentName,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,mStudentName,Toast.LENGTH_SHORT).show();
+        StudentsDAO ob = new StudentsDAO(this);
+        long id = ob.createStudent(mStudentName,mCourseName);
+        Toast.makeText(this,""+id+ " " + mCourseName,Toast.LENGTH_SHORT).show();
     }
 
     private void done(){

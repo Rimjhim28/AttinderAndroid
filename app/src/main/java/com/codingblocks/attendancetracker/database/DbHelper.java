@@ -23,11 +23,11 @@ public class DbHelper extends SQLiteOpenHelper{
     public static final String COLUMN_NUMBER_OF_LECTURES = "lectures";
 
     //creating table for names of students
-    private static final String TABLE_NAME_STUDENTS = "students";
-    private static final String COLUMN_STUDENT_ID = "_id";
-    private static final String COLUMN_STUDENT_NAME = "name";
-    private static final String COLUMN_STUDENT_ATTENDANCE = "attendance";
-    private static final String COLUMN_STUDENT_BATCH_NAME = "batch_name";
+    public static final String TABLE_NAME_STUDENTS = "students";
+    public static final String COLUMN_STUDENT_ID = "_id";
+    public static final String COLUMN_STUDENT_NAME = "name";
+    public static final String COLUMN_STUDENT_ATTENDANCE = "attendance";
+    public static final String COLUMN_STUDENT_BATCH_NAME = "batch_name";
 
     //creating the sql tab;e for batches
     private static final String SQL_CREATE_TABLE_BATCH = "CREATE TABLE " + TABLE_NAME_BATCH + "("
