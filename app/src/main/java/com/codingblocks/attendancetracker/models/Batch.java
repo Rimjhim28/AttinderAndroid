@@ -17,19 +17,6 @@ public class Batch {
     String name;
     static ArrayList<String> batches = new ArrayList<>();
 
-    public static ArrayList<String> getDummyBatches() {
-
-        batches.add("Crux");
-        batches.add("Pandora");
-        batches.add("Launchpad");
-        batches.add("Elixir");
-        batches.add("Django");
-
-        return batches;
-
-    }
-
-
     public String getName() {
         return name;
     }
@@ -40,9 +27,5 @@ public class Batch {
 
     public Batch(String name) {
         this.name = name;
-    }
-
-    public static void addNewBatch(String newBatch){
-        batches.add(newBatch);
     }
 }

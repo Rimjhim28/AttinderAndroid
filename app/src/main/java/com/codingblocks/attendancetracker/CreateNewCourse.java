@@ -63,7 +63,7 @@ public class CreateNewCourse extends AppCompatActivity {
         mStringNumberOfLectures = txtNumberOfLectures.getText().toString();
         mNumberOfLectures = Integer.parseInt(mStringNumberOfLectures);
         BatchesDAO ob = new BatchesDAO(this);
-        long id = ob.createBatch(mCourseName);
+        long id = ob.createBatch(mCourseName,mNumberOfLectures);
         Toast.makeText(this,""+id,Toast.LENGTH_SHORT).show();
     }
 
