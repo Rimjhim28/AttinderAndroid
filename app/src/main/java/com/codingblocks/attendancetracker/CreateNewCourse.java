@@ -62,12 +62,6 @@ public class CreateNewCourse extends AppCompatActivity {
         mCourseName = txtCourseName.getText().toString();
         mStringNumberOfLectures = txtNumberOfLectures.getText().toString();
         mNumberOfLectures = Integer.parseInt(mStringNumberOfLectures);
-
-        // ContentValues values = new ContentValues();
-        // values.put(BatchContract.BatchEntry.COLUMN_BATCH_NAME,mCourseName);
-        // values.put(BatchContract.BatchEntry.COLUMN_NUMBER_OF_LECTURES,mNumberOfLectures);
-
-        // Uri newUri =  getContentResolver().insert(BatchContract.BatchEntry.CONTENT_URI,values);
         BatchesDAO ob = new BatchesDAO(this);
         long id = ob.createBatch(mCourseName);
         Toast.makeText(this,""+id,Toast.LENGTH_SHORT).show();
