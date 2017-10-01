@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class Batch {
     String name;
+    private long id;
 
 
     public static ArrayList<String> getDummyBatches() {
@@ -24,6 +25,11 @@ public class Batch {
 
     }
 
+    public Batch(String name) {
+        this.name = name;
+    }
+
+    public Batch(){}
 
     public String getName() {
         return name;
@@ -33,7 +39,11 @@ public class Batch {
         this.name = name;
     }
 
-    public Batch(String name) {
-        this.name = name;
+    public long getId(){
+        return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
     }
 }

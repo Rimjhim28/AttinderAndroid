@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.codingblocks.attendancetracker.database.BatchesDAO;
 import com.codingblocks.attendancetracker.models.Batch;
 import com.codingblocks.attendancetracker.models.Student;
 import com.daprlabs.cardstack.SwipeDeck;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Integer> absentIds;
     private ArrayList<Integer> presentIds;
+    BatchesDAO ob = new BatchesDAO(this);
 
     private Handler handler;
 
@@ -76,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
         coursebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: create a DB table for this course
-                Toast.makeText(getApplicationContext(), R.string.create_batch, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this,CreateNewCourse.class);
+                startActivity(intent);
             }
         });
     }
@@ -85,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
     private void initSpinnerAdapter() {
         final String hintText = "Choose a batch... ";
 
-        ArrayList<String> batches = Batch.getDummyBatches();
+        ArrayList<String> batches = (ArrayList<String>) ob.getAllBatches();
         spinner.initializeStringValues(batches.toArray(new String[batches.size()]), hintText);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
