@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codingblocks.attendancetracker.database.AttendanceDAO;
+import com.codingblocks.attendancetracker.database.StudentsDAO;
 import com.codingblocks.attendancetracker.models.Student;
 
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class ListOfAbsentPresentStudentsActivity extends AppCompatActivity {
         absentIds = intent.getIntegerArrayListExtra("absentIds");
         batch = intent.getStringExtra("batchName");
 
-        ArrayList<Student> allStudents = Student.getDummyStudents();
+        ArrayList<Student> allStudents = new StudentsDAO(this).getallStudents(batch);
 
         presentStudents = new ArrayList<>();
         absentStudents = new ArrayList<>();
@@ -77,7 +78,6 @@ public class ListOfAbsentPresentStudentsActivity extends AppCompatActivity {
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Save attendance online.
                 Toast.makeText(ListOfAbsentPresentStudentsActivity.this, R.string.toast_attendance_is_saved, Toast.LENGTH_SHORT).show();
                 submitAttendance();
             }
