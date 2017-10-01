@@ -1,6 +1,7 @@
 package com.codingblocks.attendancetracker;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -71,12 +72,15 @@ public class CreateNewCourse extends AppCompatActivity {
     public void addStudent(){
         mNumberOfStudents++;
         mStudentName = txtStudentName.getText().toString();
+        txtStudentName.setText("");
         StudentsDAO ob = new StudentsDAO(this);
         long id = ob.createStudent(mStudentName,mCourseName);
         Toast.makeText(this,""+id+ " " + mCourseName,Toast.LENGTH_SHORT).show();
     }
 
     private void done(){
+        Intent intent = new Intent(CreateNewCourse.this,MainActivity.class);
         Toast.makeText(this,"Number of Students added:"+mNumberOfStudents,Toast.LENGTH_SHORT).show();
+        startActivity(intent);
     }
 }
