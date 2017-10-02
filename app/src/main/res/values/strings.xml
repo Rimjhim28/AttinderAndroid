@@ -16,4 +16,7 @@
     <string name="btn_add_course">Add course</string>
     <string name="create_course">create course</string>
     <string name="done">done</string>
+    <string name="view_database">view database</string>
+    <string name="label_batch">Batch</string>
+    <string name="label_lecture_number">Lecture Number</string>
 </resources>

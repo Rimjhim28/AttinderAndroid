@@ -10,6 +10,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -226,4 +229,24 @@ public class MainActivity extends AppCompatActivity {
             return 0;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_view_database,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_database:
+                viewAttendanceDatabase();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void viewAttendanceDatabase() {
+        Intent intent = new Intent(MainActivity.this,AttendanceDatabaseActivity.class);
+        startActivity(intent);
+    }
 }

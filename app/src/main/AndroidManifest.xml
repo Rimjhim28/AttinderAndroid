@@ -18,9 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ListOfAbsentPresentStudentsActivity" />
-        <activity android:name=".CreateNewCourse"></activity>
-
+        <activity android:name=".CreateNewCourse" />
+        <activity android:name=".AttendanceDatabaseActivity"></activity>
     </application>
-
 
 </manifest>
